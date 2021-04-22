@@ -4,6 +4,7 @@ services:
 
 stages:
   - build
+  - deploy
 
 variables:
   IMAGE_TAG: $DOCKER_HUB_USERNAME/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA
@@ -17,3 +18,12 @@ build:
     # - echo $IMAGE_TAG
     - docker build --pull -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  script:
+    - docker run -d --name $CI_PROJECT_NAME -p 8081:8081 $IMAGE_TAG
+  only:
+    - master
