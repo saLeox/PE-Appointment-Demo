@@ -1,20 +1,19 @@
+image: docker:20.10.6
 services:
-  - docker:19.03.12-dind
+  - docker:20.10.6-dind
 
 stages:
   - build
 
 variables:
-  # Use TLS https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled
-  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+  IMAGE_TAG: $DOCKER_HUB_USERNAME/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA
 
-# before_script:
-#   - docker login -u 236924 -p d1ec1ccf-6edc-4865-a1c3-5a00fb617fe4
+before_script:
+  - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_ACCESS_TOKEN
 
 build:
   stage: build
   script:
-    - export
-    # echo $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
-    #- docker build --pull -t gk-appointment:latest .
-    #- docker push gk-appointment:latest
+    - echo $IMAGE_TAG
+    - docker build --pull -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
