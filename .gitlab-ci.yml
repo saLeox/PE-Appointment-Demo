@@ -14,5 +14,6 @@ before_script:
 build:
   stage: build
   script:
-    - docker build --pull -t gk-appointment:latest .
-    - docker push gk-appointment:latest
+    - echo $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    #- docker build --pull -t gk-appointment:latest .
+    #- docker push gk-appointment:latest
