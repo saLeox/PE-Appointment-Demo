@@ -1,6 +1,6 @@
-image: docker:20.10.6
-services:
-  - docker:20.10.6-dind
+#image: docker:20.10.6
+#services:
+#  - docker:20.10.6-dind
 
 stages:
   - build
