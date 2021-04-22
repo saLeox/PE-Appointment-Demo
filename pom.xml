@@ -15,7 +15,7 @@
 	    <version>c6a2fdde7c</version>
 	</parent>
 
-	<artifactId>gf-placement-appointment-8001</artifactId>
+	<artifactId>gf-placement-appointment-8081</artifactId>
 
 	<dependencies>
 

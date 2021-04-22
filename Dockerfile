@@ -5,6 +5,6 @@ RUN mvn -f /usr/src/app/pom.xml clean package
 
 FROM java:8
 VOLUME /tmp
-COPY --from=build /usr/src/app/target/microservicecloud.jar /usr/app/appointment-service-8001.jar
-EXPOSE 8001
-ENTRYPOINT ["java", "-jar", "/usr/app/appointment-service-8001.jar"]
+COPY --from=build /usr/src/app/target/microservicecloud.jar /usr/app/appointment-service-8081.jar
+EXPOSE 8081
+ENTRYPOINT ["java", "-jar", "/usr/app/appointment-service-8081.jar"]
