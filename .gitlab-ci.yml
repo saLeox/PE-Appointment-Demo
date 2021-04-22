@@ -20,10 +20,13 @@ build:
     - docker push $IMAGE_TAG
   only:
     - master
-
+  tags:
+    - develop
 deploy:
   stage: deploy
   script:
     - docker run -d --name $CI_PROJECT_NAME -p 8081:8081 $IMAGE_TAG
   only:
     - master
+  tags:
+    - develop
