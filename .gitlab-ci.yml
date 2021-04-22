@@ -5,10 +5,11 @@ stages:
   - build
 
 variables:
-  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+  # Use TLS https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
 
 before_script:
-  - docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_ACCESS_TOKEN}
+  - docker login -u 236924 -p d1ec1ccf-6edc-4865-a1c3-5a00fb617fe4
 
 build:
   stage: build
