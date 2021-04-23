@@ -28,7 +28,7 @@ deploy:
   script:
     - echo $IMAGE_TAG
     - if [ "$(docker ps -a | grep $IMAGE_PREFIX)" ]
-    - then docker stop $(docker ps -a | grep $IMAGE_PREFIX | awk '{print $1}') && docker rm (docker ps -a | grep $IMAGE_PREFIX | awk '{print $1}') -f
+    - then docker stop $(docker ps -a | grep $IMAGE_PREFIX | awk '{print $1}') && docker rm $(docker ps -a | grep $IMAGE_PREFIX | awk '{print $1}') -f
     - fi
     - if [ "$(docker images -a | grep $IMAGE_PREFIX)" ] 
     - then docker rmi $(docker images -a | grep $IMAGE_PREFIX | awk '{print $3}') -f
