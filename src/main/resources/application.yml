@@ -1,10 +1,5 @@
 server:
-  port: 8001
-  
-#mybatis:
-#  config-location: classpath:mybatis/mybatis.cfg.xml
-#  type-aliases-package: com.gof.springcloud.entities
-#  mapper-locations: classpath:mybatis/mapper/*.xml
+  port: 8081
 
 logging:
   file:
@@ -13,16 +8,6 @@ spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfigurationdo
   application:
-    name: gk1-sample
-#  data:
-#    mongodb:
-#      uri: mongodb://mongo:27017
-#      database: travelplan
-#  redis:
-#    database: 0
-#    host: redis
-#    port: 6379
-#    password:
-#    timeout: 10000
-      
+    name: gf-appointment
+
 
