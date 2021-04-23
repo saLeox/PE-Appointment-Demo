@@ -26,6 +26,8 @@ deploy:
   stage: deploy
   script:
     - echo $IMAGE_TAG
+    - docker ps | grep "$DOCKER_HUB_USERNAME/$CI_PROJECT_NAME" | awk '{print $1}'| xargs docker rm -f
+    - docker images | grep "$DOCKER_HUB_USERNAME/$CI_PROJECT_NAME" | awk '{print $3}'| xargs docker rmi -f
     - docker run -d --name $CI_PROJECT_NAME -p 8081:8081 $IMAGE_TAG
   only:
     - master
