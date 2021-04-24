@@ -17,6 +17,7 @@ build:
   stage: build
   script:
     - echo $IMAGE_TAG
+    - echo pwd
     - docker build --pull -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
   only:
@@ -27,6 +28,7 @@ deploy:
   stage: deploy
   script:
     - echo $IMAGE_TAG
+    - echo pwd
     - if [ "$(docker ps -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA)" ]
     - then docker stop $(docker ps -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA | awk '{print $1}') && docker rm $(docker ps -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA | awk '{print $1}') -f
     - fi
