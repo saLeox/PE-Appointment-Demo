@@ -3,7 +3,7 @@ COPY src /usr/src/app/src
 COPY pom.xml /usr/src/app  
 RUN mvn -f /usr/src/app/pom.xml clean package
 
-FROM java:8
+FROM openjdk:8-jre-alpine
 VOLUME /tmp
 COPY --from=build /usr/src/app/target/microservicecloud.jar /usr/app/appointment-service-8081.jar
 EXPOSE 8081
