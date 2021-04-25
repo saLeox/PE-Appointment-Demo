@@ -29,11 +29,11 @@ deploy:
   script:
     - echo $IMAGE_TAG
     - echo pwd
-    - if [ "$(docker ps -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA)" ]
-    - then docker stop $(docker ps -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA | awk '{print $1}') && docker rm $(docker ps -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA | awk '{print $1}') -f
+    - if [ "$(docker ps -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA)" ] ; then
+    - docker stop $(docker ps -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA | awk '{print $1}') && docker rm $(docker ps -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA | awk '{print $1}') -f
     - fi
-    - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA)" ] 
-    - then docker rmi $(docker images -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA | awk '{print $3}') -f
+    - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA)" ] ; then
+    - docker rmi $(docker images -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA | awk '{print $3}') -f
     - fi
     - docker run -d --name $CI_PROJECT_NAME -p 8081:8081 $IMAGE_TAG
   only:
