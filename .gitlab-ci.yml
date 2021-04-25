@@ -17,8 +17,7 @@ build:
   stage: build
   script:
     - echo $IMAGE_TAG
-    - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep $CI_COMMIT_SHORT_SHA)" ]; then echo no image build; else docker build --pull -t $IMAGE_TAG . ; fi
-    - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep $CI_COMMIT_SHORT_SHA)" ]; then echo no image push; else docker push $IMAGE_TAG; fi
+    - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep $CI_COMMIT_SHORT_SHA)" ]; then echo no image build & push; else docker build --pull -t $IMAGE_TAG . && docker push $IMAGE_TAG; fi
   only:
     - master
   tags:
