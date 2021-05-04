@@ -2,7 +2,7 @@
 
   
 
-Demo project for the private placement appointment service.
+Demo project for the Private Equity appointment service.
 
 ##  **milestone**
 
