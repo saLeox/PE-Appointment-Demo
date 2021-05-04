@@ -1,9 +1,14 @@
-# appointment
+
+# Appointment
+
+
+Demo project for the Private Equity Appointment service.
 
   
 
-Demo project for the Private Equity appointment service.
+## **Milestone**
 
-##  **milestone**
+  
 
- 1. [CI/CD Setting in Gitlab](https://github.com/saLeox/GitLab_CICD_Instructor/blob/main/README.md)
+1. [CI/CD Setting in Gitlab](https://github.com/saLeox/GitLab_CICD_Instructor/blob/main/README.md)
+2. [Data modeling](https://drive.google.com/file/d/1IsPhRL2Mh_ZsWuKF01jSWysiTcVBxlHT/view?usp=sharing)
