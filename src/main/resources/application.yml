@@ -8,6 +8,10 @@ spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfigurationdo
   application:
-    name: gf-appointment
-
-
+    name: gf-pe-appointment
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.93.30.94:3306/pe_appointment?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8&characterEncoding=UTF-8
+    username: root
+    password: vide@lwd523146

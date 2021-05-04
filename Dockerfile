@@ -9,7 +9,6 @@ FROM openjdk:8-jre-alpine as builder
 WORKDIR application
 COPY --from=build /usr/src/app/target/*.jar application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
-#ENTRYPOINT ["java", "-jar", "/usr/app/appointment-service-8081.jar"]
 
 # extract
 FROM openjdk:8-jre-alpine
