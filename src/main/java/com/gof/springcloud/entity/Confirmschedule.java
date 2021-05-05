@@ -1,10 +1,15 @@
 package com.gof.springcloud.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -29,16 +34,16 @@ public class Confirmschedule implements Serializable {
     @ApiModelProperty(value = "预约主键")
     private Integer appointmentId;
 
-    @ApiModelProperty(value = "冷却期开始时间")
+    @ApiModelProperty(value = "冷却期开始时间 /yyyy-MM-dd HH:mm:ss")
     private Date coolingStart;
 
-    @ApiModelProperty(value = "冷却期结束时间")
+    @ApiModelProperty(value = "冷却期结束时间 /yyyy-MM-dd HH:mm:ss")
     private Date coolingEnd;
 
-    @ApiModelProperty(value = "调用呼叫中心接口时间")
+    @ApiModelProperty(value = "调用呼叫中心接口时间 /yyyy-MM-dd HH:mm:ss")
     private Date calloutTime;
 
-    @ApiModelProperty(value = "呼叫中心返回结果时间")
+    @ApiModelProperty(value = "呼叫中心返回结果时间 /yyyy-MM-dd HH:mm:ss")
     private Date callbackTime;
 
     @ApiModelProperty(value = "用户确认结果 (1成功 / 0失败)")
@@ -61,34 +66,50 @@ public class Confirmschedule implements Serializable {
         this.appointmentId = appointmentId;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCoolingStart() {
         return coolingStart;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public void setCoolingStart(Date coolingStart) {
         this.coolingStart = coolingStart;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCoolingEnd() {
         return coolingEnd;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public void setCoolingEnd(Date coolingEnd) {
         this.coolingEnd = coolingEnd;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCalloutTime() {
         return calloutTime;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public void setCalloutTime(Date calloutTime) {
         this.calloutTime = calloutTime;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCallbackTime() {
         return callbackTime;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public void setCallbackTime(Date callbackTime) {
         this.callbackTime = callbackTime;
     }

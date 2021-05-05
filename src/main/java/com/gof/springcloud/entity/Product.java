@@ -1,10 +1,15 @@
 package com.gof.springcloud.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -32,7 +37,7 @@ public class Product implements Serializable {
     @ApiModelProperty(value = "产品全称")
     private String productName;
 
-    @ApiModelProperty(value = "销售日期")
+    @ApiModelProperty(value = "销售日期 /yyyy-MM-dd HH:mm:ss")
     private Date saleDate;
 
     @ApiModelProperty(value = "投资人数上限")
@@ -75,10 +80,14 @@ public class Product implements Serializable {
         this.productName = productName;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getSaleDate() {
         return saleDate;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public void setSaleDate(Date saleDate) {
         this.saleDate = saleDate;
     }
