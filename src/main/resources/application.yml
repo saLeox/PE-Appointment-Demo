@@ -21,6 +21,9 @@ spring:
     username: admin
     password: vide@lwd523146
   cloud:
+    nacos:
+      discovery:
+        server-addr: 47.93.30.94:8848
     stream:
       bindings:
         delayed-topic-output:
