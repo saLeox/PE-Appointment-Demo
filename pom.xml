@@ -28,6 +28,11 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- stream-rabbit-mq -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+		</dependency>
 	
 		<!-- mybatis-plus -->
 		<dependency>
