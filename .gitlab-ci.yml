@@ -22,7 +22,8 @@ package:
     - develop
   script:
     - echo $(ls) 
-    - docker run -v /opt/maven/.m2:/root/.m2 maven mvn -f $(pwd)/pom.xml clean package
+    - cp $(pwd)/ opt/package
+    - docker run -v /opt/maven/.m2:/root/.m2 maven mvn -f opt/package/pom.xml clean package
 build:
   stage: build
   only:
