@@ -22,7 +22,7 @@ package:
     - develop
   script:
     - echo $(ls) 
-    - rm -rf /opt/package/ && mkdir -m 777 /opt/package/ && cp -r $(pwd)/* /opt/package/ && chmod -R 777 /opt/package/
+    - cp -r $(pwd)/* /opt/package/ && chmod -R 777 /opt/package/
 build:
   stage: build
   only:
