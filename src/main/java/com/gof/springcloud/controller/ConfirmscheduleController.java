@@ -2,14 +2,15 @@ package com.gof.springcloud.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gof.springcloud.entity.Confirmschedule;
-import com.gof.springcloud.entity.ResultVo;
 import com.gof.springcloud.service.ConfirmscheduleService;
+import com.gof.springcloud.vo.ResultVo;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -38,7 +39,7 @@ public class ConfirmscheduleController {
 
 	@PostMapping
 	@ApiOperation(value = "Create a confirmSchedule")
-	public ResultVo<Confirmschedule> createConfirmSchedule(Confirmschedule confirmschedule) {
+	public ResultVo<Confirmschedule> createConfirmSchedule(@Validated Confirmschedule confirmschedule) {
 		confirmschedule.setScheduleId(null);
 		confirmscheduleService.save(confirmschedule);
 		ResultVo<Confirmschedule> resultVo = new ResultVo<Confirmschedule>();

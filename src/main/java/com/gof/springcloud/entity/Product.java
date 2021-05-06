@@ -3,6 +3,9 @@ package com.gof.springcloud.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -31,24 +34,34 @@ public class Product implements Serializable {
     @TableId(value = "product_id", type = IdType.AUTO)
     private Integer productId;
 
+    @NotNull
     @ApiModelProperty(value = "产品代码")
     private Integer prodoctCode;
 
+    @NotNull
     @ApiModelProperty(value = "产品全称")
     private String productName;
 
+    @NotNull
     @ApiModelProperty(value = "销售日期 /yyyy-MM-dd HH:mm:ss")
     private Date saleDate;
 
+    @NotNull
+    @Size(min = 1, message = "投资人数必须大于0")
     @ApiModelProperty(value = "投资人数上限")
     private Integer investorLimit;
 
+    @NotNull
+    @Size(min = 1, message = "资金规模必须大于0")
     @ApiModelProperty(value = "资金规模 (元)")
     private Float fundCapacity;
 
+    @NotNull
     @ApiModelProperty(value = "基金管理人")
     private String fundManager;
 
+    @NotNull
+    @Size(min = 1, message = "冷却期必须大于等于0")
     @ApiModelProperty(value = "冷却期 (天)")
     private Integer coolingPeriod;
 

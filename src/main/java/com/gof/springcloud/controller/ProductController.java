@@ -1,15 +1,18 @@
 package com.gof.springcloud.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gof.springcloud.entity.Product;
-import com.gof.springcloud.entity.ResultVo;
 import com.gof.springcloud.service.ProductService;
+import com.gof.springcloud.vo.ResultVo;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -38,12 +41,18 @@ public class ProductController {
 
 	@PostMapping
 	@ApiOperation(value = "Create a product")
-	public ResultVo<Product> createProduct(Product product) {
+	public ResultVo<Product> createProduct(@Validated Product product) {
 		product.setProductId(null);
 		productService.save(product);
 		ResultVo<Product> resultVo = new ResultVo<Product>();
 		resultVo.success(product);
 		return resultVo;
+	}
+
+	@GetMapping("/all")
+	@ApiOperation(value = "query all PE product")
+	public List<Product> get() {
+		return productService.list();
 	}
 
 }

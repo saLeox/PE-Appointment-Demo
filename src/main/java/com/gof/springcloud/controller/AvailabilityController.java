@@ -2,14 +2,15 @@ package com.gof.springcloud.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gof.springcloud.entity.Availability;
-import com.gof.springcloud.entity.ResultVo;
 import com.gof.springcloud.service.AvailabilityService;
+import com.gof.springcloud.vo.ResultVo;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -38,7 +39,7 @@ public class AvailabilityController {
 
 	@PostMapping
 	@ApiOperation(value = "Create an availability")
-	public ResultVo<Availability> createAvailability(Availability availability) {
+	public ResultVo<Availability> createAvailability(@Validated Availability availability) {
 		availability.setAvailabilityId(null);
 		availabilityService.save(availability);
 		ResultVo<Availability> resultVo = new ResultVo<Availability>();

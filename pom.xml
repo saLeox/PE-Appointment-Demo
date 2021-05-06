@@ -36,6 +36,13 @@
 	</dependencyManagement>
 
 	<dependencies>
+
+		<!-- validation -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		 </dependency>
+	
 		<!-- stream-rabbit-mq -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

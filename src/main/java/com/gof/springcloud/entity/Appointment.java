@@ -3,6 +3,9 @@ package com.gof.springcloud.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -31,15 +34,20 @@ public class Appointment implements Serializable {
     @TableId(value = "appointment_id", type = IdType.AUTO)
     private Integer appointmentId;
 
+    @NotNull
     @ApiModelProperty(value = "产品主键")
     private Integer productId;
 
+    @NotNull
     @ApiModelProperty(value = "经理主键")
     private Integer managerId;
 
+    @NotNull
     @ApiModelProperty(value = "客户主键")
     private Integer clientId;
 
+    @NotNull
+    @Size(min = 1, message = "认购数量必须大于0")
     @ApiModelProperty(value = "认购数量 (元)")
     private Float subscribeQty;
 

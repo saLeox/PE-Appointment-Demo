@@ -2,14 +2,15 @@ package com.gof.springcloud.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gof.springcloud.entity.Appointment;
-import com.gof.springcloud.entity.ResultVo;
 import com.gof.springcloud.service.AppointmentService;
+import com.gof.springcloud.vo.ResultVo;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -40,7 +41,7 @@ public class AppointmentController {
 
 	@PostMapping
 	@ApiOperation(value = "Create an appointment")
-	public ResultVo<Appointment> createAppointment(Appointment appointment) {
+	public ResultVo<Appointment> createAppointment(@Validated Appointment appointment) {
 		appointment.setAppointmentId(null);
 		appointmentService.save(appointment);
 		ResultVo<Appointment> resultVo = new ResultVo<Appointment>();

@@ -3,6 +3,8 @@ package com.gof.springcloud.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -31,15 +33,19 @@ public class Confirmschedule implements Serializable {
     @TableId(value = "schedule_id", type = IdType.AUTO)
     private Integer scheduleId;
 
+    @NotNull
     @ApiModelProperty(value = "预约主键")
     private Integer appointmentId;
 
+    @NotNull
     @ApiModelProperty(value = "冷却期开始时间 /yyyy-MM-dd HH:mm:ss")
     private Date coolingStart;
 
+    @NotNull
     @ApiModelProperty(value = "冷却期结束时间 /yyyy-MM-dd HH:mm:ss")
     private Date coolingEnd;
 
+    @NotNull
     @ApiModelProperty(value = "调用呼叫中心接口时间 /yyyy-MM-dd HH:mm:ss")
     private Date calloutTime;
 
