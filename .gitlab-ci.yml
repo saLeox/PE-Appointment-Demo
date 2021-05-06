@@ -3,7 +3,6 @@
 #  - docker:20.10.6-dind
 
 stages:
-  - package
   - build
   - deploy
 
@@ -14,19 +13,6 @@ variables:
 before_script:
   - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_ACCESS_TOKEN
 
-package:
-  stage: package
-  only:
-    - master
-  tags:
-    - develop
-  script:
-    - echo $( mvn -version) 
-    - mvn clean package
-    - echo $(ls) 
-    - echo $(pwd) 
-
-
 build:
   stage: build
   only:
@@ -34,10 +20,11 @@ build:
   tags:
     - develop
   script:
-    - echo $IMAGE_TAG
-    - echo $(pwd) 
-    - echo $(ls) 
+    - echo $( mvn -version) 
+    - mvn clean package
     - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep $CI_COMMIT_SHORT_SHA)" ]; then echo No image build or push; else docker build --pull -t $IMAGE_TAG . && docker push $IMAGE_TAG; fi
+    - echo $(ls) 
+    - echo $(pwd) 
 
 deploy:
   stage: deploy
