@@ -21,9 +21,9 @@ package:
   tags:
     - develop
   script:
-    - echo $(ls) 
     - echo $( mvn -version) 
     - mvn clean package
+    - echo $(ls) 
 
 build:
   stage: build
