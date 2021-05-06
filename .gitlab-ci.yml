@@ -3,6 +3,7 @@
 #  - docker:20.10.6-dind
 
 stages:
+  - package
   - build
   - deploy
 
@@ -13,17 +14,30 @@ variables:
 before_script:
   - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_ACCESS_TOKEN
 
-build:
-  stage: build
-  script:
-    - echo $IMAGE_TAG
-    - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep $CI_COMMIT_SHORT_SHA)" ]; then echo No image build or push; else docker build --pull -t $IMAGE_TAG . && docker push $IMAGE_TAG; fi
+package:
+  stage: package
   only:
     - master
   tags:
     - develop
+  script:
+    - docker run -it -v /opt/maven/.m2:/root/.m2 maven mvn clean package
+build:
+  stage: build
+  only:
+    - master
+  tags:
+    - develop
+  script:
+    - echo $IMAGE_TAG
+    - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep $CI_COMMIT_SHORT_SHA)" ]; then echo No image build or push; else docker build --pull -t $IMAGE_TAG . && docker push $IMAGE_TAG; fi
+
 deploy:
   stage: deploy
+  only:
+    - master
+  tags:
+    - develop
   script:
     - echo $IMAGE_TAG
     # current version container already fail, then remove
@@ -34,7 +48,4 @@ deploy:
     - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA)" ]; then docker rmi $(docker images -a | grep $IMAGE_PREFIX | grep -v $CI_COMMIT_SHORT_SHA | awk '{print $3}') -f; fi
     # no current version container exist, then run a new container
     - if [ "$(docker ps -a | grep $IMAGE_PREFIX | grep $CI_COMMIT_SHORT_SHA)" ]; then echo No need to run new container; else docker run -d --name $CI_PROJECT_NAME -p 8081:8081 $IMAGE_TAG; fi
-  only:
-    - master
-  tags:
-    - develop
+
