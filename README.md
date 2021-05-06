@@ -15,4 +15,6 @@ Demo project for the Private Equity Appointment service.
 
 5. [Embed](https://github.com/saLeox/delayed-queue-rabbit/blob/main/README.md) RabbitMQ and Spring Cloud Stream to achieve delayed queue.
 
-6. Register onto [Alibaba Nacos](http://47.93.30.94:8848/nacos/index.html#/serviceManagement?dataId=&group=&appName=&namespace=&pageSize=&pageNo=), and build a [Service Gateway](https://gitlab.com/gf-private-placement/gateway) with dynamic routing, online-document integration, and [global logging](https://gitlab.com/gf-private-placement/logging).
+6. Register onto [Alibaba Nacos](http://47.93.30.94:8848/nacos/index.html#/serviceManagement?dataId=&group=&appName=&namespace=&pageSize=&pageNo=), and build a [Service Gateway](https://gitlab.com/gf-private-placement/gateway) with dynamic routing, online-document integration, [global logging](https://gitlab.com/gf-private-placement/logging) and [authentication](https://gitlab.com/gf-private-placement/uac).
+
+7.  Import the [workflow service](https://gitlab.com/gf-private-placement/workflow) to facilitate the approval processing.
