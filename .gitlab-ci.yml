@@ -22,7 +22,7 @@ package:
     - develop
   script:
     - echo $(ls) 
-    - docker run -v $(pwd):/usr/src/mymaven -v /opt/maven/.m2:/root/.m2 -v $(pwd)/target:/usr/src/mymaven/target -w /usr/src/mymaven maven mvn clean package
+    - docker run -v $(pwd):/usr/src/mymaven -v /opt/maven/.m2:/root/.m2 -v $(pwd)/target:/usr/src/mymaven/target -w /usr/src/mymaven maven mvn package
 
 build:
   stage: build
