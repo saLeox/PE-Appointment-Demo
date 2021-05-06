@@ -2,7 +2,7 @@
 # run to generate multi stage 
 FROM openjdk:8-jre-alpine as builder
 WORKDIR application
-COPY target/*.jar application.jar
+COPY opt/package/target/*.jar application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
 # extract
