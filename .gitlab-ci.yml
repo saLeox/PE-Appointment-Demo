@@ -22,10 +22,7 @@ package:
     - develop
   script:
     - echo $(ls) 
-    - rm -rf /opt/package/
-    - mkdir /opt/package/
-    - cp -r $(pwd)/* /opt/package/
-    - chmod -R 777 /opt/package/
+    - rm -rf /opt/package/ && mkdir /opt/package/ && cp -r $(pwd)/* /opt/package/ && chmod -R 777 /opt/package/
     - docker run -v /opt/maven/.m2:/root/.m2 maven mvn -f opt/package/pom.xml clean package
 build:
   stage: build
