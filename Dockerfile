@@ -3,8 +3,8 @@ FROM maven:3.5.3-jdk-8-alpine AS build
 COPY src /usr/src/app/src  
 COPY pom.xml /usr/src/app
 # build all dependencies
-RUN mvn dependency:go-offline -B --fail-never -v /opt/maven/.m2:/root/.m2
-RUN mvn -f /usr/src/app/pom.xml clean package -v /opt/maven/.m2:/root/.m2
+RUN mvn dependency:go-offline -B --fail-never
+RUN mvn -f /usr/src/app/pom.xml clean package
 
 # run to generate multi stage 
 FROM openjdk:8-jre-alpine as builder
