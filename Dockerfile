@@ -1,10 +1,9 @@
 # mvn build
 FROM maven:3.5.3-jdk-8-alpine AS build  
-# build all dependencies
+COPY src /usr/src/app/src  
 COPY pom.xml /usr/src/app
+# build all dependencies
 RUN mvn dependency:go-offline -B --fail-never
-# package
-COPY src /usr/src/app/src
 RUN mvn -f /usr/src/app/pom.xml clean package
 
 # run to generate multi stage 
