@@ -24,6 +24,8 @@ package:
     - echo $( mvn -version) 
     - mvn clean package
     - echo $(ls) 
+    - echo $(pwd) 
+
 
 build:
   stage: build
@@ -33,6 +35,8 @@ build:
     - develop
   script:
     - echo $IMAGE_TAG
+    - echo $(pwd) 
+    - echo $(ls) 
     - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep $CI_COMMIT_SHORT_SHA)" ]; then echo No image build or push; else docker build --pull -t $IMAGE_TAG . && docker push $IMAGE_TAG; fi
 
 deploy:
