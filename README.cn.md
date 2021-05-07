@@ -23,6 +23,6 @@
 
 9. 基于策略模式与Open feign实现 [预约校验](https://gitlab.com/gf-private-placement/appointment/-/tree/master/src/main/java/com/gof/springcloud/service/validator) .
 
-10. 使用 CAS (Compare And Swap) 和 Transaction management实现预约事务.
+10. 使用 mybaits-plus乐观锁 (CAS) 和 Transaction management开发预约事务.
 
 11. 开发其余API端口供工作流模块流转.
