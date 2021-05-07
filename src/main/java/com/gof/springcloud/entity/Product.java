@@ -36,7 +36,7 @@ public class Product implements Serializable {
 
     @NotNull
     @ApiModelProperty(value = "产品代码")
-    private Integer prodoctCode;
+    private String prodoctCode;
 
     @NotNull
     @ApiModelProperty(value = "产品全称")
@@ -62,7 +62,7 @@ public class Product implements Serializable {
 
     @NotNull
     @Range(min = 1, message = "冷却期必须大于等于0")
-    @ApiModelProperty(value = "冷却期 (天)")
+    @ApiModelProperty(value = "冷却期 (小时)")
     private Integer coolingPeriod;
 
     @ApiModelProperty(value = "最小认购金额 (元)")
@@ -77,11 +77,11 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Integer getProdoctCode() {
+    public String getProdoctCode() {
         return prodoctCode;
     }
 
-    public void setProdoctCode(Integer prodoctCode) {
+    public void setProdoctCode(String prodoctCode) {
         this.prodoctCode = prodoctCode;
     }
 

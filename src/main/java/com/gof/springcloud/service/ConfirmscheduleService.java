@@ -1,7 +1,8 @@
 package com.gof.springcloud.service;
 
-import com.gof.springcloud.entity.Confirmschedule;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gof.springcloud.entity.Confirmschedule;
+import com.gof.springcloud.vo.ResultVo;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ConfirmscheduleService extends IService<Confirmschedule> {
 
+	public ResultVo<String> schedule(int approvalId, int key);
 }

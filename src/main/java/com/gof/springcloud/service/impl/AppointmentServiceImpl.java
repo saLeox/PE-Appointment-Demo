@@ -96,4 +96,60 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
 		return resultVo;
 	}
 
+	@Override
+	@Transactional
+	public ResultVo<String> cancel(int approvalId, int key) {
+		ResultVo<String> resultVo = new ResultVo<String>();
+		// validate
+		ResultVo<Appointment> validateRes = this.legalValidate(approvalId, key);
+		if (!validateRes.isSuccess()) {
+			resultVo.failure(validateRes.getCode(), validateRes.getMsg());
+			return resultVo;
+		}
+		Appointment appointment = validateRes.getObj();
+		Availability availability = availabilityService
+				.getOne(new QueryWrapper<Availability>().eq("product_id", appointment.getProductId()));
+		if (null == availability) {
+			resultVo.failure(400, "Illegal Request");
+			return resultVo;
+		}
+		appointment.setStatus(Constants.APPOINTMENT_STATUS_FAILURE);
+		this.updateById(appointment);
+		// return availability
+		availability.setFundAvailability(availability.getFundAvailability() + appointment.getSubscribeQty());
+		availability.setInvestorAvailability(availability.getInvestorAvailability() + 1);
+		availabilityService.updateById(availability);
+		resultVo.success(null);
+		return resultVo;
+	}
+
+	@Override
+	public ResultVo<String> finalise(int approvalId, int key) {
+		ResultVo<String> resultVo = new ResultVo<String>();
+		// validate
+		ResultVo<Appointment> validateRes = this.legalValidate(approvalId, key);
+		if (!validateRes.isSuccess()) {
+			resultVo.failure(validateRes.getCode(), validateRes.getMsg());
+			return resultVo;
+		}
+		Appointment appointment = validateRes.getObj();
+		appointment.setStatus(Constants.APPOINTMENT_STATUS_SUCCESS);
+		this.updateById(appointment);
+		resultVo.success(null);
+		return resultVo;
+	}
+
+	@Override
+	public ResultVo<Appointment> legalValidate(int approvalId, int appointmentId) {
+		ResultVo<Appointment> resultVo = new ResultVo<Appointment>();
+		Appointment appointment = this.getById(appointmentId);
+		if (null == appointment || !appointment.getApprovalId().equals(approvalId)
+				|| !appointment.getStatus().equals(Constants.APPOINTMENT_STATUS_PENDING)) {
+			resultVo.failure(400, "Illegal Request");
+			return resultVo;
+		}
+		resultVo.success(appointment);
+		return resultVo;
+	}
+
 }

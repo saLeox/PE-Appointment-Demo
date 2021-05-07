@@ -18,7 +18,6 @@ public class DelayedSender {
 	 */
 	public void delayedMessage(String msg, int time) {
 		System.out.println("Send time: " + LocalDateTime.now() + "  Send: " + msg);
-		// 延时时间20秒
 		delayedSink.output().send(MessageBuilder.withPayload(msg).setHeader("x-delay", time).build());
 	}
 

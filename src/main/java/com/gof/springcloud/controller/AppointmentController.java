@@ -58,5 +58,19 @@ public class AppointmentController {
 		return appointmentService.validate(appointment);
 	}
 
+	@PostMapping("/cancel")
+	@ApiOperation(value = "Cancel an appointment")
+	public ResultVo<String> cancelAppointment(int approvalId, int key) {
+		return appointmentService.cancel(approvalId, key);
+	}
+
+	@PostMapping("/finalise")
+	@ApiOperation(value = "Finalise an appointment")
+	public ResultVo<String> finaliseAppointment(int approvalId, int key) {
+		return appointmentService.finalise(approvalId, key);
+	}
+
+
+
 }
 

@@ -2,9 +2,7 @@ package com.gof.springcloud.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +23,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/availability")
 public class AvailabilityController {
+
 	@Autowired
 	private AvailabilityService availabilityService;
 	@GetMapping
@@ -34,16 +33,6 @@ public class AvailabilityController {
 		Availability availability = availabilityService.getById(key);
 		if (null == availability) resultVo.failure(404, "availability not found");
 		else resultVo.success(availability);
-		return resultVo;
-	}
-
-	@PostMapping
-	@ApiOperation(value = "Create an availability")
-	public ResultVo<Availability> createAvailability(@Validated Availability availability) {
-		availability.setAvailabilityId(null);
-		availabilityService.save(availability);
-		ResultVo<Availability> resultVo = new ResultVo<Availability>();
-		resultVo.success(availability);
 		return resultVo;
 	}
 

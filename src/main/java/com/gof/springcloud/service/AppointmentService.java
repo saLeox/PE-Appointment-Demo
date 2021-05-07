@@ -18,4 +18,15 @@ public interface AppointmentService extends IService<Appointment> {
 
 	public ResultVo<Appointment> saveTransaction(Appointment appointment);
 
+	public ResultVo<String> cancel(int approvalId, int key);
+
+	public ResultVo<String> finalise(int approvalId, int key);
+
+	/**
+	 * Validate whether the appointment is still pending
+	 * @param approvalId
+	 * @param appointmentId
+	 * @return if true return the entity, otherwise return the false msg.
+	 */
+	public ResultVo<Appointment> legalValidate(int approvalId, int appointmentId);
 }

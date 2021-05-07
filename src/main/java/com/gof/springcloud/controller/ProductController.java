@@ -29,6 +29,7 @@ import io.swagger.annotations.ApiOperation;
 public class ProductController {
 	@Autowired
 	private ProductService productService;
+
 	@GetMapping
 	@ApiOperation(value = "Get a product by key")
 	public ResultVo<Product> getProduct(int key) {

@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 
 /**
  * <p>
@@ -23,6 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author ss
  * @since 2021-05-04
  */
+@Builder
 @TableName("ConfirmSchedule")
 @ApiModel(value="Confirmschedule对象", description="用户确认计划")
 public class Confirmschedule implements Serializable {
