@@ -9,9 +9,11 @@ import org.hibernate.validator.constraints.Range;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 
 /**
  * <p>
@@ -22,6 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2021-05-04
  */
 @TableName("Availability")
+@Builder
 @ApiModel(value="Availability对象", description="私募产品剩余额度信息")
 public class Availability implements Serializable {
 
@@ -45,6 +48,8 @@ public class Availability implements Serializable {
     @ApiModelProperty(value = "认购人数剩余额度")
     private Integer investorAvailability;
 
+    @Version
+	private Integer version;
 
     public Integer getAvailabilityId() {
         return availabilityId;
@@ -77,6 +82,14 @@ public class Availability implements Serializable {
     public void setInvestorAvailability(Integer investorAvailability) {
         this.investorAvailability = investorAvailability;
     }
+
+    public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 
     @Override
     public String toString() {

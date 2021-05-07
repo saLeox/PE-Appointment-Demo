@@ -15,4 +15,7 @@ import com.gof.springcloud.vo.ResultVo;
 public interface AppointmentService extends IService<Appointment> {
 
 	public ResultVo<String> validate(Appointment appointment);
+
+	public ResultVo<Appointment> saveTransaction(Appointment appointment);
+
 }

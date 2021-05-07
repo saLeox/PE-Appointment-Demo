@@ -49,9 +49,7 @@ public class AppointmentController {
 			resultVo.failure(validateRes.getCode(), validateRes.getMsg());
 			return resultVo;
 		}
-		appointmentService.save(appointment);
-		resultVo.success(appointment);
-		return resultVo;
+		return appointmentService.saveTransaction(appointment);
 	}
 
 	@PostMapping("/validate")
