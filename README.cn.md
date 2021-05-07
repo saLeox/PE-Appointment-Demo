@@ -1,28 +1,28 @@
 
-# PE Appointment
+# 私募预约
 
-Demo project for the PE (Private Equity) Appointment service.
+私募预约DEMO项目
+  
+## **里程碑**
 
-## **Milestone**
+1. [CI/CD 搭建 in Gitlab](https://github.com/saLeox/GitLab_CICD_Instructor/blob/main/README.md)
 
-1. [CI/CD Setting in Gitlab](https://github.com/saLeox/GitLab_CICD_Instructor/blob/main/README.md)
+2. [数据建模](https://drive.google.com/file/d/1IsPhRL2Mh_ZsWuKF01jSWysiTcVBxlHT/view?usp=sharing)
 
-2. [Data modeling](https://drive.google.com/file/d/1IsPhRL2Mh_ZsWuKF01jSWysiTcVBxlHT/view?usp=sharing)
+3. 使用 Druid和Mybaits-Plus构建持久层
 
-3. Develop the persistence layer based on Druid and Mybaits-Plus
+4. 部署到阿里云虚机 [入口](http://47.93.30.94:8081/swagger-ui/index.html#/)
 
-4. Deply onto Alibaba EC2 machine with the [API endpoint](http://47.93.30.94:8081/swagger-ui/index.html#/)
+5. [嵌入](https://github.com/saLeox/delayed-queue-rabbit/blob/main/README.md) RabbitMQ 和 Spring Cloud Stream以支持延时任务.
 
-5. [Embed](https://github.com/saLeox/delayed-queue-rabbit/blob/main/README.md) RabbitMQ and Spring Cloud Stream to achieve delayed queue.
+6. 注册至 [Alibaba Nacos](http://47.93.30.94:8848/nacos/index.html#/serviceManagement?dataId=&group=&appName=&namespace=&pageSize=&pageNo=), 搭建具有动态路由，全局在线文档，[全局日志](https://gitlab.com/gf-private-placement/logging)，和[鉴权](https://gitlab.com/gf-private-placement/uac) 的[服务路由](https://gitlab.com/gf-private-placement/gateway) .
 
-6. Register onto [Alibaba Nacos](http://47.93.30.94:8848/nacos/index.html#/serviceManagement?dataId=&group=&appName=&namespace=&pageSize=&pageNo=), and build a [Service Gateway](https://gitlab.com/gf-private-placement/gateway) with dynamic routing, online-document integration, [global logging](https://gitlab.com/gf-private-placement/logging) and [authentication](https://gitlab.com/gf-private-placement/uac).
+7. 引入 [工作流微服务](https://gitlab.com/gf-private-placement/workflow) 来支持流转操作.
 
-7. Import the [workflow service](https://gitlab.com/gf-private-placement/workflow) to facilitate the approval processing.
+8. 构建客户，客户经理和呼叫中心的 [Mock microservice](https://gitlab.com/gf-private-placement/mock).
 
-8. [Mock microservice](https://gitlab.com/gf-private-placement/mock) for Client, Manager, and Call centre.
+9. 基于策略模式与Open feign实现 [预约校验](https://gitlab.com/gf-private-placement/appointment/-/tree/master/src/main/java/com/gof/springcloud/service/validator) .
 
-9. Implement [appointment validation](https://gitlab.com/gf-private-placement/appointment/-/tree/master/src/main/java/com/gof/springcloud/service/validator) based on strategy pattern and open feign.
+10. 使用 CAS (Compare And Swap) 和 Transaction management实现预约事务.
 
-10. Use CAS (Compare And Swap) and Transaction management to implement the appointment function.
-
-11. Develop the event endpoint that will be proceed by workflow.
+11. 开发其余API端口供工作流模块流转.
