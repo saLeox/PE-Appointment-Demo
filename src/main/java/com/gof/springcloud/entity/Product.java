@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -47,12 +47,12 @@ public class Product implements Serializable {
     private Date saleDate;
 
     @NotNull
-    @Size(min = 1, message = "投资人数必须大于0")
+    @Range(min = 1, message = "投资人数必须大于0")
     @ApiModelProperty(value = "投资人数上限")
     private Integer investorLimit;
 
     @NotNull
-    @Size(min = 1, message = "资金规模必须大于0")
+    @Range(min = 1, message = "资金规模必须大于0")
     @ApiModelProperty(value = "资金规模 (元)")
     private Float fundCapacity;
 
@@ -61,7 +61,7 @@ public class Product implements Serializable {
     private String fundManager;
 
     @NotNull
-    @Size(min = 1, message = "冷却期必须大于等于0")
+    @Range(min = 1, message = "冷却期必须大于等于0")
     @ApiModelProperty(value = "冷却期 (天)")
     private Integer coolingPeriod;
 

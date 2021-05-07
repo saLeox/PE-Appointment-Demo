@@ -39,3 +39,11 @@ spring:
           delayed-topic-output:
             producer:
               delayed-exchange: true
+
+feign:
+  url:
+    client: localhost:8080/client
+    manager: localhost:8080/manager
+              
+              
+              

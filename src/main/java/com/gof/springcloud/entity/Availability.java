@@ -3,7 +3,8 @@ package com.gof.springcloud.entity;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -35,12 +36,12 @@ public class Availability implements Serializable {
     private Integer productId;
 
     @NotNull
-    @Size(min = 0, message = "认购金额剩余额度必须大于等于0")
+    @Range(min = 0, message = "认购金额剩余额度必须大于等于0")
     @ApiModelProperty(value = "认购金额剩余额度")
     private Float fundAvailability;
 
     @NotNull
-    @Size(min = 0, message = "认购人数剩余额度必须大于等于0")
+    @Range(min = 0, message = "认购人数剩余额度必须大于等于0")
     @ApiModelProperty(value = "认购人数剩余额度")
     private Integer investorAvailability;
 

@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -47,7 +47,7 @@ public class Appointment implements Serializable {
     private Integer clientId;
 
     @NotNull
-    @Size(min = 1, message = "认购数量必须大于0")
+    @Range(min = 1, message = "认购数量必须大于0")
     @ApiModelProperty(value = "认购数量 (元)")
     private Float subscribeQty;
 

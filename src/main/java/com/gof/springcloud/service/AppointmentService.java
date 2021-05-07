@@ -1,7 +1,8 @@
 package com.gof.springcloud.service;
 
-import com.gof.springcloud.entity.Appointment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gof.springcloud.entity.Appointment;
+import com.gof.springcloud.vo.ResultVo;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface AppointmentService extends IService<Appointment> {
 
+	public ResultVo<String> validate(Appointment appointment);
 }

@@ -42,11 +42,22 @@ public class AppointmentController {
 	@PostMapping
 	@ApiOperation(value = "Create an appointment")
 	public ResultVo<Appointment> createAppointment(@Validated Appointment appointment) {
-		appointment.setAppointmentId(null);
-		appointmentService.save(appointment);
 		ResultVo<Appointment> resultVo = new ResultVo<Appointment>();
+		appointment.setAppointmentId(null);
+		ResultVo<String> validateRes = appointmentService.validate(appointment);
+		if (!validateRes.isSuccess()) {
+			resultVo.failure(validateRes.getCode(), validateRes.getMsg());
+			return resultVo;
+		}
+		appointmentService.save(appointment);
 		resultVo.success(appointment);
 		return resultVo;
+	}
+
+	@PostMapping("/validate")
+	@ApiOperation(value = "Validate an appointment")
+	public ResultVo<String> validateAppointment(@Validated Appointment appointment) {
+		return appointmentService.validate(appointment);
 	}
 
 }
