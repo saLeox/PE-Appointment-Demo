@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gof.springcloud.feign.vo.Client;
 
-@FeignClient(name = "ClientFeign",url = "${feign.url.client}")
+@FeignClient(name = "mock")
 public interface ClientFeign {
 
-	@GetMapping
+	@GetMapping("/client")
 	public Client getClient(@RequestParam int key);
 }

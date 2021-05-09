@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gof.springcloud.constants.Constants;
 import com.gof.springcloud.entity.Appointment;
 import com.gof.springcloud.service.AppointmentService;
 import com.gof.springcloud.vo.ResultVo;
@@ -41,7 +43,8 @@ public class AppointmentController {
 
 	@PostMapping
 	@ApiOperation(value = "Create an appointment")
-	public ResultVo<Appointment> createAppointment(@Validated Appointment appointment) {
+	public ResultVo<Appointment> createAppointment(@Validated Appointment appointment,
+			@RequestHeader(value = Constants.TOKEN_HEADER) String token) {
 		ResultVo<Appointment> resultVo = new ResultVo<Appointment>();
 		appointment.setAppointmentId(null);
 		ResultVo<String> validateRes = appointmentService.validate(appointment);
@@ -49,7 +52,7 @@ public class AppointmentController {
 			resultVo.failure(validateRes.getCode(), validateRes.getMsg());
 			return resultVo;
 		}
-		return appointmentService.saveTransaction(appointment);
+		return appointmentService.saveTransaction(appointment, token);
 	}
 
 	@PostMapping("/validate")

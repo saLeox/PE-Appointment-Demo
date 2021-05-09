@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gof.springcloud.feign.vo.Managerqualification;
 
-@FeignClient(name = "ManagerFeign",url = "${feign.url.manager}")
+@FeignClient(name = "mock")
 public interface ManagerFeign {
-	@GetMapping
+	@GetMapping("/manager")
 	public Managerqualification getQualification(@RequestParam int key);
 }

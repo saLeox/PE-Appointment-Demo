@@ -16,7 +16,7 @@ public interface AppointmentService extends IService<Appointment> {
 
 	public ResultVo<String> validate(Appointment appointment);
 
-	public ResultVo<Appointment> saveTransaction(Appointment appointment);
+	public ResultVo<Appointment> saveTransaction(Appointment appointment, String token);
 
 	public ResultVo<String> cancel(int approvalId, int key);
 

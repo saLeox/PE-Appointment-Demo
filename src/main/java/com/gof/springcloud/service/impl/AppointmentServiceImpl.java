@@ -16,6 +16,7 @@ import com.gof.springcloud.entity.Availability;
 import com.gof.springcloud.entity.Product;
 import com.gof.springcloud.mapper.AppointmentMapper;
 import com.gof.springcloud.service.AppointmentService;
+import com.gof.springcloud.service.ApprovalService;
 import com.gof.springcloud.service.AvailabilityService;
 import com.gof.springcloud.service.ProductService;
 import com.gof.springcloud.service.validator.Validator;
@@ -48,6 +49,8 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
 	private AvailabilityService availabilityService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ApprovalService approvalService;
 
 	@Override
 	public ResultVo<String> validate(Appointment appointment) {
@@ -67,7 +70,7 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
 
 	@Override
 	@Transactional
-	public ResultVo<Appointment> saveTransaction(Appointment appointment) {
+	public ResultVo<Appointment> saveTransaction(Appointment appointment, String token) {
 		// availability update
 		ResultVo<Appointment> resultVo = new ResultVo<Appointment>();
 		Availability availability = availabilityService
@@ -86,10 +89,10 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
 			availabilityService.updateById(availability);
 		}
 		// initiate workflow
-		int auditID = 1;
+		int approvalId = approvalService.startProcess(token, appointment.getClientId(), appointment.getProductId());
 		// make appointment
 		appointment.setSubscribeTime(new Date());
-		appointment.setApprovalId(auditID);
+		appointment.setApprovalId(approvalId);
 		appointment.setStatus(Constants.APPOINTMENT_STATUS_PENDING);
 		this.save(appointment);
 		resultVo.success(appointment);
