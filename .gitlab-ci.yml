@@ -22,7 +22,8 @@ build:
   script:
     - echo $( mvn -version) 
     - mvn clean package
-    - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep $CI_COMMIT_SHORT_SHA)" ]; then echo No image build or push; else docker build --pull -t $IMAGE_TAG . && docker push $IMAGE_TAG; fi
+    # && docker push $IMAGE_TAG  // slow to push
+    - if [ "$(docker images -a | grep $IMAGE_PREFIX | grep $CI_COMMIT_SHORT_SHA)" ]; then echo No image build or push; else docker build --pull -t $IMAGE_TAG . ; fi
     - echo $(ls) 
     - echo $(pwd) 
 
