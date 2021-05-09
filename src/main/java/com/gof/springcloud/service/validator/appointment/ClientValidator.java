@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gof.springcloud.entity.Appointment;
-import com.gof.springcloud.feign.ClientFeign;
+import com.gof.springcloud.feign.MockFeign;
 import com.gof.springcloud.feign.vo.Client;
 import com.gof.springcloud.service.validator.Validator;
 import com.gof.springcloud.vo.ResultVo;
@@ -13,7 +13,7 @@ import com.gof.springcloud.vo.ResultVo;
 public class ClientValidator<Q> implements Validator<Q>{
 
 	@Autowired
-	private ClientFeign clientFeign;
+	private MockFeign clientFeign;
 
 	@Override
 	public ResultVo validate(Object t) {

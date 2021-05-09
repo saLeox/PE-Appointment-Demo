@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.gof.springcloud.entity.Appointment;
 import com.gof.springcloud.entity.Confirmschedule;
 import com.gof.springcloud.entity.Product;
-import com.gof.springcloud.feign.CalltaskFeign;
+import com.gof.springcloud.feign.MockFeign;
 import com.gof.springcloud.feign.vo.Calltask;
 import com.gof.springcloud.service.AppointmentService;
 import com.gof.springcloud.service.ConfirmscheduleService;
@@ -26,7 +26,7 @@ public class DelayedReceiver {
 	@Autowired
 	private ProductService productService;
 	@Autowired
-	private CalltaskFeign calltaskFeign;
+	private MockFeign calltaskFeign;
 	@Autowired
 	private AppointmentService appointmentService;
 
