@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gof.springcloud.constants.Constants;
@@ -63,16 +65,15 @@ public class AppointmentController {
 
 	@PostMapping("/cancel")
 	@ApiOperation(value = "Cancel an appointment")
-	public ResultVo<String> cancelAppointment(int approvalId, int key) {
-		return appointmentService.cancel(approvalId, key);
+	public ResultVo<String> cancelAppointment(@RequestParam int auditId, @RequestBody int key) {
+		return appointmentService.cancel(auditId, key);
 	}
 
 	@PostMapping("/finalise")
 	@ApiOperation(value = "Finalise an appointment")
-	public ResultVo<String> finaliseAppointment(int approvalId, int key) {
-		return appointmentService.finalise(approvalId, key);
+	public ResultVo<String> finaliseAppointment(@RequestParam int auditId, @RequestBody int key) {
+		return appointmentService.finalise(auditId, key);
 	}
-
 
 
 }

@@ -4,7 +4,9 @@ package com.gof.springcloud.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gof.springcloud.entity.Confirmschedule;
@@ -38,8 +40,8 @@ public class ConfirmscheduleController {
 
 	@PostMapping("/schedule")
 	@ApiOperation(value = "Schedule a ConfirmCall")
-	public ResultVo<String> scheduleConfirmCall(int approvalId, int key) {
-		return confirmscheduleService.schedule(approvalId, key);
+	public ResultVo<String> scheduleConfirmCall(@RequestParam int auditId, @RequestBody int key) {
+		return confirmscheduleService.schedule(auditId, key);
 	}
 
 }
