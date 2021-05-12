@@ -15,4 +15,8 @@ import com.gof.springcloud.vo.ResultVo;
 public interface ConfirmscheduleService extends IService<Confirmschedule> {
 
 	public ResultVo<String> schedule(int approvalId, int key);
+
+	public ResultVo<String> failure (int approvalId, int key);
+
+	public ResultVo<String> success (int approvalId, int key);
 }

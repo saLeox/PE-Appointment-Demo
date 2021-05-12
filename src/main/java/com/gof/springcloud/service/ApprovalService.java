@@ -1,5 +1,7 @@
 package com.gof.springcloud.service;
 
+import com.gof.springcloud.feign.vo.workflow.AuditDetailVo;
+
 /**
  * <p>
  * 私募流程审批 服务类
@@ -17,4 +19,6 @@ public interface ApprovalService {
 	 * @return approvalId
 	 */
 	public Integer startProcess(String token, Integer clientID, Integer productID);
+
+	public AuditDetailVo getApprovalDetail(Integer approvalId);
 }

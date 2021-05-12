@@ -1,6 +1,7 @@
 package com.gof.springcloud.controller;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gof.springcloud.constants.Constants;
 import com.gof.springcloud.entity.Appointment;
 import com.gof.springcloud.service.AppointmentService;
+import com.gof.springcloud.vo.AppointmentDetail;
 import com.gof.springcloud.vo.ResultVo;
 
 import io.swagger.annotations.ApiOperation;
@@ -43,11 +45,21 @@ public class AppointmentController {
 		return resultVo;
 	}
 
+	@GetMapping("/detail")
+	@ApiOperation(value = "Get an appointment detail by key")
+	public AppointmentDetail getDetail(int key) {
+		return appointmentService.getDetail(key);
+	}
+
 	@PostMapping
 	@ApiOperation(value = "Create an appointment")
 	public ResultVo<Appointment> createAppointment(@Validated Appointment appointment,
-			@RequestHeader(value = Constants.TOKEN_HEADER) String token) {
+			@RequestHeader(value = Constants.TOKEN_HEADER, required = false) String token) {
 		ResultVo<Appointment> resultVo = new ResultVo<Appointment>();
+		if (StringUtils.isBlank(token)) {
+			resultVo.failure(401, "illegal request");
+			return resultVo;
+		}
 		appointment.setAppointmentId(null);
 		ResultVo<String> validateRes = appointmentService.validate(appointment);
 		if (!validateRes.isSuccess()) {
@@ -68,13 +80,6 @@ public class AppointmentController {
 	public ResultVo<String> cancelAppointment(@RequestParam int auditId, @RequestBody int key) {
 		return appointmentService.cancel(auditId, key);
 	}
-
-	@PostMapping("/finalise")
-	@ApiOperation(value = "Finalise an appointment")
-	public ResultVo<String> finaliseAppointment(@RequestParam int auditId, @RequestBody int key) {
-		return appointmentService.finalise(auditId, key);
-	}
-
 
 }
 

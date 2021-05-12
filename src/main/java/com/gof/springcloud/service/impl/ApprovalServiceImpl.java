@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.gof.springcloud.constants.Constants;
 import com.gof.springcloud.feign.WorkflowFeign;
+import com.gof.springcloud.feign.vo.workflow.AuditDetailVo;
 import com.gof.springcloud.feign.vo.workflow.AuditRecord;
 import com.gof.springcloud.feign.vo.workflow.AuditRecordNode;
 import com.gof.springcloud.feign.vo.workflow.InitWorkflowParam;
@@ -53,6 +54,11 @@ public class ApprovalServiceImpl implements ApprovalService {
 		// fail
 		log.error("工作流初始化异常:{}", resultVo.getMsg());
 		return null;
+	}
+
+	@Override
+	public AuditDetailVo getApprovalDetail(Integer approvalId) {
+		return workflowFeign.getProgress(approvalId).getObj();
 	}
 
 }

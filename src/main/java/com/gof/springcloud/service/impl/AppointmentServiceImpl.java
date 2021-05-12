@@ -13,17 +13,24 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gof.springcloud.constants.Constants;
 import com.gof.springcloud.entity.Appointment;
 import com.gof.springcloud.entity.Availability;
+import com.gof.springcloud.entity.Confirmschedule;
 import com.gof.springcloud.entity.Product;
+import com.gof.springcloud.feign.MockFeign;
+import com.gof.springcloud.feign.vo.Client;
+import com.gof.springcloud.feign.vo.Managerqualification;
+import com.gof.springcloud.feign.vo.workflow.AuditDetailVo;
 import com.gof.springcloud.mapper.AppointmentMapper;
 import com.gof.springcloud.service.AppointmentService;
 import com.gof.springcloud.service.ApprovalService;
 import com.gof.springcloud.service.AvailabilityService;
+import com.gof.springcloud.service.ConfirmscheduleService;
 import com.gof.springcloud.service.ProductService;
 import com.gof.springcloud.service.validator.Validator;
 import com.gof.springcloud.service.validator.appointment.AppointmentValidator;
 import com.gof.springcloud.service.validator.appointment.AvailabilityValidator;
 import com.gof.springcloud.service.validator.appointment.ClientValidator;
 import com.gof.springcloud.service.validator.appointment.ManagerValidator;
+import com.gof.springcloud.vo.AppointmentDetail;
 import com.gof.springcloud.vo.ResultVo;
 
 /**
@@ -51,6 +58,35 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
 	private ProductService productService;
 	@Autowired
 	private ApprovalService approvalService;
+	@Autowired
+	private ConfirmscheduleService confirmscheduleService;
+	@Autowired
+	private MockFeign mockFeign;
+
+	@Override
+	public AppointmentDetail getDetail(int key) {
+		// internal data
+		Appointment appointment = this.getById(key);
+		if (null == appointment) return null;
+		Product product = productService.getById(appointment.getProductId());
+		Availability availability = availabilityService.getOne(new QueryWrapper<Availability>().eq("product_id", appointment.getProductId()));
+		Confirmschedule confirmschedule = confirmscheduleService.getOne(new QueryWrapper<Confirmschedule>().eq("appointment_id", key));
+		// external data
+		AuditDetailVo approvalDetail = approvalService.getApprovalDetail(appointment.getApprovalId());
+		Client client = mockFeign.getClient(appointment.getClientId());
+		Managerqualification managerqualification = mockFeign.getQualification(appointment.getManagerId());
+		// pack the result
+		AppointmentDetail res = AppointmentDetail.builder()
+			.appointment(appointment)
+			.product(product)
+			.availability(availability)
+			.confirmschedule(confirmschedule)
+			.approvalDetail(approvalDetail)
+			.client(client)
+			.managerqualification(managerqualification)
+			.build();
+		return res;
+	}
 
 	@Override
 	public ResultVo<String> validate(Appointment appointment) {
@@ -127,22 +163,6 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
 	}
 
 	@Override
-	public ResultVo<String> finalise(int approvalId, int key) {
-		ResultVo<String> resultVo = new ResultVo<String>();
-		// validate
-		ResultVo<Appointment> validateRes = this.legalValidate(approvalId, key);
-		if (!validateRes.isSuccess()) {
-			resultVo.failure(validateRes.getCode(), validateRes.getMsg());
-			return resultVo;
-		}
-		Appointment appointment = validateRes.getObj();
-		appointment.setStatus(Constants.APPOINTMENT_STATUS_SUCCESS);
-		this.updateById(appointment);
-		resultVo.success(null);
-		return resultVo;
-	}
-
-	@Override
 	public ResultVo<Appointment> legalValidate(int approvalId, int appointmentId) {
 		ResultVo<Appointment> resultVo = new ResultVo<Appointment>();
 		Appointment appointment = this.getById(appointmentId);
@@ -154,5 +174,6 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
 		resultVo.success(appointment);
 		return resultVo;
 	}
+
 
 }

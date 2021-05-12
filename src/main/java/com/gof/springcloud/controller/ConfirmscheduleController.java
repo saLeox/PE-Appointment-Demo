@@ -44,5 +44,19 @@ public class ConfirmscheduleController {
 		return confirmscheduleService.schedule(auditId, key);
 	}
 
+	@PostMapping("/success")
+	@ApiOperation(value = "CallBack Success")
+	public ResultVo<String> callBackSuccess(@RequestParam int auditId, @RequestBody int key) {
+		return confirmscheduleService.success(auditId, key);
+	}
+
+	@PostMapping("/failure")
+	@ApiOperation(value = "CallBack Failure")
+	public ResultVo<String> callBackFailure(@RequestParam int auditId, @RequestBody int key) {
+		return confirmscheduleService.failure(auditId, key);
+	}
+
+
+
 }
 

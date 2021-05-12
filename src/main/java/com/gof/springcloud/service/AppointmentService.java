@@ -2,6 +2,7 @@ package com.gof.springcloud.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.gof.springcloud.entity.Appointment;
+import com.gof.springcloud.vo.AppointmentDetail;
 import com.gof.springcloud.vo.ResultVo;
 
 /**
@@ -14,13 +15,30 @@ import com.gof.springcloud.vo.ResultVo;
  */
 public interface AppointmentService extends IService<Appointment> {
 
+	/**
+	 * Get detail of appointment
+	 * @param key
+	 * @return
+	 */
+	public AppointmentDetail getDetail(int key);
+
 	public ResultVo<String> validate(Appointment appointment);
 
+	/**
+	 * Launch the appointment application process
+	 * @param appointment
+	 * @param token
+	 * @return
+	 */
 	public ResultVo<Appointment> saveTransaction(Appointment appointment, String token);
 
+	/**
+	 * Cancel the appointment during the approval process
+	 * @param approvalId
+	 * @param key
+	 * @return
+	 */
 	public ResultVo<String> cancel(int approvalId, int key);
-
-	public ResultVo<String> finalise(int approvalId, int key);
 
 	/**
 	 * Validate whether the appointment is still pending
