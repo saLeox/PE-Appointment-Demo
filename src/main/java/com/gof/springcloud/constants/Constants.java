@@ -15,4 +15,10 @@ public class Constants {
     public static final String WORKFLOW_STATUS_SAVE = "save";
     public static final String WORKFLOW_STATUS_PENDING = "pending";
 
+    // redis
+	public static final String REDIS_LUA_SCRIPT_AVAILABILITY = "lua/availability.lua";
+	public static final String REDIS_KEY_PREFIX_AVAILABILITY_FUND = "availability_fund_";
+	public static final String REDIS_KEY_PREFIX_AVAILABILITY_INVESTOR = "availabilit_investor_";
+
+
 }

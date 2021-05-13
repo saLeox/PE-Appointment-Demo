@@ -1,7 +1,7 @@
 package com.gof.springcloud.service;
 
-import com.gof.springcloud.entity.Availability;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gof.springcloud.entity.Availability;
 
 /**
  * <p>
@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface AvailabilityService extends IService<Availability> {
 
+	public boolean updateAvailability(float qty);
 }

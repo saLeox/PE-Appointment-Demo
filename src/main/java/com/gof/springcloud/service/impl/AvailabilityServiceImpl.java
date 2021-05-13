@@ -1,10 +1,12 @@
 package com.gof.springcloud.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gof.springcloud.entity.Availability;
 import com.gof.springcloud.mapper.AvailabilityMapper;
 import com.gof.springcloud.service.AvailabilityService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>
@@ -16,5 +18,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AvailabilityServiceImpl extends ServiceImpl<AvailabilityMapper, Availability> implements AvailabilityService {
+
+	@Autowired
+	private AvailabilityMapper availabilityMapper;
+
+	@Override
+	public boolean updateAvailability(float qty) {
+		return availabilityMapper.updateAvailability(qty);
+	}
 
 }

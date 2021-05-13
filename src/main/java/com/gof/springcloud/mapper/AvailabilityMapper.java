@@ -1,6 +1,7 @@
 package com.gof.springcloud.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gof.springcloud.entity.Availability;
@@ -15,5 +16,7 @@ import com.gof.springcloud.entity.Availability;
  */
 @Mapper
 public interface AvailabilityMapper extends BaseMapper<Availability> {
+
+	boolean updateAvailability(@Param("qty") float qty);
 
 }
