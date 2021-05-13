@@ -37,7 +37,7 @@ public class DelayedReceiver {
 
 		// request the callcentre
 		Appointment appointment = appointmentService.getById(schedule.getAppointmentId());
-		Product product = productService.getById(appointment.getAppointmentId());
+		Product product = productService.getById(appointment.getProductId());
 		Calltask calltask = Calltask.builder()
 				.appointmentId(appointment.getAppointmentId())
 				.clientId(appointment.getClientId())
