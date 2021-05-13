@@ -17,6 +17,6 @@ import com.gof.springcloud.entity.Availability;
 @Mapper
 public interface AvailabilityMapper extends BaseMapper<Availability> {
 
-	boolean updateAvailability(@Param("qty") float qty);
+	boolean updateAvailability(@Param("productId") int productId, @Param("qty") float qty);
 
 }

@@ -13,5 +13,5 @@ import com.gof.springcloud.entity.Availability;
  */
 public interface AvailabilityService extends IService<Availability> {
 
-	public boolean updateAvailability(float qty);
+	public boolean updateAvailability(int productId, float qty);
 }

@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,9 +69,10 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
 	@Autowired
 	private MockFeign mockFeign;
 	@Autowired
-    private StringRedisTemplate redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 	@Autowired
 	private DefaultRedisScript<Boolean> defaultRedisScript;
+
 
 	@Override
 	public AppointmentDetail getDetail(int key) {
@@ -135,16 +136,16 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
 		String investor_key = "availabilit_investor_" + productId;
 
 		 //缓存查找
-		String availability_fund = redisTemplate.opsForValue().get(fund_key);
-		String availabilit_investor = redisTemplate.opsForValue().get(investor_key);
+		Object availability_fund = redisTemplate.opsForValue().get(fund_key);
+		Object availabilit_investor = redisTemplate.opsForValue().get(investor_key);
 
 		// 判断是否为空
 		if (availability_fund == null || availabilit_investor == null) {
 			Availability availability = availabilityService
 					.getOne(new QueryWrapper<Availability>().eq("product_id", appointment.getProductId()));
 			// NX - > 存在则不更新，防止覆盖
-			redisTemplate.opsForValue().setIfAbsent(fund_key, availability.getFundAvailability().toString());
-			redisTemplate.opsForValue().setIfAbsent(investor_key, availability.getInvestorAvailability().toString());
+			redisTemplate.opsForValue().setIfAbsent(fund_key, String.valueOf(availability.getFundAvailability()));
+			redisTemplate.opsForValue().setIfAbsent(investor_key, String.valueOf(availability.getInvestorAvailability()));
 		}
 
 		// 判断库存
@@ -156,7 +157,7 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
 			return resultVo;
 		}
 		// 更新库存
-		availabilityService.updateAvailability(appointment.getSubscribeQty());
+		availabilityService.updateAvailability(appointment.getProductId(), appointment.getSubscribeQty());
 
 		// 初始化
 		int approvalId = approvalService.startProcess(token, appointment.getClientId(), appointment.getProductId());

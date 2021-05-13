@@ -23,8 +23,8 @@ public class AvailabilityServiceImpl extends ServiceImpl<AvailabilityMapper, Ava
 	private AvailabilityMapper availabilityMapper;
 
 	@Override
-	public boolean updateAvailability(float qty) {
-		return availabilityMapper.updateAvailability(qty);
+	public boolean updateAvailability(int productId, float qty) {
+		return availabilityMapper.updateAvailability(productId, qty);
 	}
 
 }
