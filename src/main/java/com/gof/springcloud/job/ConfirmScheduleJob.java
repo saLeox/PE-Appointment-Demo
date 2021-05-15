@@ -32,7 +32,7 @@ public class ConfirmScheduleJob implements SimpleJob {
 				shardingContext.getShardingTotalCount(), shardingContext.getShardingItem());
 		log.info("shardTotal:{}, shardIdx:{}, num:{}", shardingContext.getShardingTotalCount(),
 				shardingContext.getShardingItem(), arr.size());
-
+		if (arr.size() == 0) return;
 		// send the confirm key to delayed queue to execute the task
 		for (Confirmschedule schedule : arr) {
 			log.info("Send confirm:{} to the delayed queue", schedule.getScheduleId().toString());
