@@ -60,7 +60,7 @@ spring:
 
 elasticjob:
   reg-center:
-    server-lists: 47.93.30.94:2181
+    server-lists: zookeeper:2181
     namespace: appointment
   jobs:
     simpleJob:
