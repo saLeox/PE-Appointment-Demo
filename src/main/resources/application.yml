@@ -61,11 +61,13 @@ spring:
 elasticjob:
   reg-center:
     server-lists: 47.93.30.94:2181
-    namespace: appointment-dev
+    namespace: appointment
   jobs:
     simpleJob:
       elasticJobClass: com.gof.springcloud.job.ConfirmScheduleJob
-      cron: 0 0/30 8-18 * * MON-FRI # 每周一至周五 早8晚6 每30分钟执行一次
+      # 每周一至周五 早8晚8 每30分钟执行一次
+      # 秒 分 时 日期 月份 星期 年(可选)
+      cron: 0 0/30 8-20 ? * MON-FRI
       shardingTotalCount: 3
       #shardingItemParameters: 0=Shanghai #just example  
               

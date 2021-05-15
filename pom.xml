@@ -32,18 +32,27 @@
 				<artifactId>mysql-connector-java</artifactId>
 				<version>8.0.23</version>
 			</dependency>
+			<!-- curator -->
+			<dependency>
+			    <groupId>org.apache.curator</groupId>
+			    <artifactId>curator-recipes</artifactId>
+			    <version>5.1.0</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.curator</groupId>
+			    <artifactId>curator-framework</artifactId>
+			    <version>5.1.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
-	
 		<!-- elasticjob -->
 		<dependency>
 		    <groupId>org.apache.shardingsphere.elasticjob</groupId>
 		    <artifactId>elasticjob-lite-spring-boot-starter</artifactId>
 		    <version>3.0.0-RC1</version>
 		</dependency>
-
 		<!-- redis -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>

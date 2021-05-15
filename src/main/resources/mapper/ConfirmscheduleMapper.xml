@@ -13,7 +13,7 @@
 		FROM ConfirmSchedule 
 		WHERE ISNULL(result) 
 		AND MOD(schedule_id,#{shardTotal}) = #{shardIdx}
-		AND cooling_end <![CDATA[ >= ]]> DATE_SUB(NOW(),INTERVAL 30 MINUTE)
+		AND cooling_end <![CDATA[ <= ]]> DATE_ADD(NOW(),INTERVAL 30 MINUTE)
     </select>
 
 </mapper>
