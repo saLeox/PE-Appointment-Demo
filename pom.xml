@@ -37,6 +37,13 @@
 
 	<dependencies>
 	
+		<!-- elasticjob -->
+		<dependency>
+		    <groupId>org.apache.shardingsphere.elasticjob</groupId>
+		    <artifactId>elasticjob-lite-spring-boot-starter</artifactId>
+		    <version>3.0.0-RC1</version>
+		</dependency>
+
 		<!-- redis -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>

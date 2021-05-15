@@ -58,11 +58,15 @@ spring:
             producer:
               delayed-exchange: true
 
-#feign:
-#  url:
-#    client: localhost:8080/client
-#    manager: localhost:8080/manager
-#    calltask: localhost:8080/calltask
-              
+elasticjob:
+  reg-center:
+    server-lists: 47.93.30.94:2181
+    namespace: appointment-dev
+  jobs:
+    simpleJob:
+      elasticJobClass: com.gof.springcloud.job.ConfirmScheduleJob
+      cron: 0 0/30 8-18 * * MON-FRI # 每周一至周五 早8晚6 每30分钟执行一次
+      shardingTotalCount: 3
+      #shardingItemParameters: 0=Shanghai #just example  
               
               

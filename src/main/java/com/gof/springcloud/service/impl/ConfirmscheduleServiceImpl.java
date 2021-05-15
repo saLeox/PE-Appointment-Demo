@@ -14,7 +14,6 @@ import com.gof.springcloud.entity.Availability;
 import com.gof.springcloud.entity.Confirmschedule;
 import com.gof.springcloud.entity.Product;
 import com.gof.springcloud.mapper.ConfirmscheduleMapper;
-import com.gof.springcloud.rabbit.DelayedSender;
 import com.gof.springcloud.service.AppointmentService;
 import com.gof.springcloud.service.AvailabilityService;
 import com.gof.springcloud.service.ConfirmscheduleService;
@@ -39,8 +38,7 @@ public class ConfirmscheduleServiceImpl extends ServiceImpl<ConfirmscheduleMappe
 	private ProductService productService;
 	@Autowired
 	private AvailabilityService availabilityService;
-	@Autowired
-	private DelayedSender delayedSender;
+
 
 	@Override
 	public ResultVo<String> schedule(int approvalId, int key) {
@@ -59,9 +57,6 @@ public class ConfirmscheduleServiceImpl extends ServiceImpl<ConfirmscheduleMappe
 		Confirmschedule schedule = Confirmschedule.builder().appointmentId(key).coolingStart(coolingStart)
 				.coolingEnd(coolingEnd).build();
 		this.save(schedule);
-		// send the confirm key to delayed queue to execute the task
-		delayedSender.delayedMessage(schedule.getScheduleId().toString(),
-				TimeUtils.getMilliSecondGap(coolingStart, coolingEnd));
 		resultVo.success(null);
 		return resultVo;
 	}

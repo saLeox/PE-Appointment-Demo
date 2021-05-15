@@ -172,38 +172,6 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
 		return resultVo;
 	}
 
-
-//	@Override
-//	@Transactional
-//	public ResultVo<Appointment> saveTransaction(Appointment appointment, String token) {
-//		// availability update
-//		ResultVo<Appointment> resultVo = new ResultVo<Appointment>();
-//		Availability availability = availabilityService
-//				.getOne(new QueryWrapper<Availability>().eq("product_id", appointment.getProductId()));
-//		if (null == availability) {
-//			Product product = productService.getById(appointment.getProductId());
-//			availability = Availability.builder()
-//					.productId(appointment.getProductId())
-//					.investorAvailability(product.getInvestorLimit() - 1)
-//					.fundAvailability(product.getFundCapacity() - appointment.getSubscribeQty())
-//					.build();
-//			availabilityService.save(availability);
-//		} else {
-//			availability.setInvestorAvailability(availability.getInvestorAvailability() - 1);
-//			availability.setFundAvailability(availability.getFundAvailability()- appointment.getSubscribeQty());
-//			availabilityService.updateById(availability);
-//		}
-//		// initiate workflow
-//		int approvalId = approvalService.startProcess(token, appointment.getClientId(), appointment.getProductId());
-//		// make appointment
-//		appointment.setSubscribeTime(new Date());
-//		appointment.setApprovalId(approvalId);
-//		appointment.setStatus(Constants.APPOINTMENT_STATUS_PENDING);
-//		this.save(appointment);
-//		resultVo.success(appointment);
-//		return resultVo;
-//	}
-
 	@Override
 	@Transactional
 	public ResultVo<String> cancel(int approvalId, int key) {
