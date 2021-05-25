@@ -23,6 +23,6 @@ Demo project for the PE (Private Equity) Appointment service.
 
 9. Implement [appointment validation](https://gitlab.com/gf-private-placement/appointment/-/tree/master/src/main/java/com/gof/springcloud/service/validator) based on strategy pattern and open feign.
 
-10. Use CAS (Compare And Swap) and Transaction management to implement the appointment function.
+10. Based on Redis, use distributed lock and lua script to [control the balance](https://github.com/saLeox/Concurrent-Balance-Deduction) under the control of Transaction management.
 
-11. Develop the event endpoint that will be proceed by workflow.
+12. Develop the event endpoint that will be proceed by workflow.
